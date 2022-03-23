@@ -1,0 +1,27 @@
+version: "3"
+
+env:
+  ENV: dev
+vars:
+  PROJECT_PATH: '{{.PWD}}'
+
+dotenv: ['{{.PWD}}/config/env/.env']
+
+tasks:
+    db.service.start:
+        desc: Start the database service (DB and DB-UI)
+        cmds:
+            - docker-compose  -f docker/docker-compose.yml up -d
+    db.service.stop:
+        desc: Stop the database service (DB and DB-UI)
+        cmds:
+            - docker rm -f {{.DB_CONTAINER_NAME}} > /dev/null 2>&1 || true
+            - docker rm -f {{.DB_UI_CONTAINER_NAME}} > /dev/null 2>&1 || true
+    db.stop:
+        desc: Stop DB container
+        cmds:
+            - docker rm -f {{.DB_CONTAINER_NAME}} > /dev/null 2>&1 || true
+    db.ui.stop:
+        desc: Stop DB-UI container
+        cmds:
+            - docker rm -f {{.DB_CONTAINER_NAME}} > /dev/null 2>&1 || true
