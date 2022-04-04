@@ -36,8 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
-## volumen docker
+# volumen docker
 db/data/
 
-#ENV
+# environment variables file
 config/env/.env
