@@ -3,7 +3,6 @@ version: '3.1'
 services:
   db:
     image: "postgres:${POSTGRES_VERSION}"
-    restart: always
     container_name: "${DB_CONTAINER_NAME}"
     environment:
       - "POSTGRES_USER=${POSTGRES_USER}"
@@ -15,7 +14,6 @@ services:
       - ../db/data:/var/lib/postgresql/data
   db-ui:
     image: "${DB_UI_VERSION}"
-    restart: always
     container_name: "${DB_UI_CONTAINER_NAME}"
     environment:
       - "PGADMIN_DEFAULT_EMAIL=${DB_UI_USER}"
