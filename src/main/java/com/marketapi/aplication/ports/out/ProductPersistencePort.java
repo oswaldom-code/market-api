@@ -5,18 +5,15 @@ import java.util.Optional;
 
 import com.marketapi.domain.models.Product;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductPersistencePort {
 
-	Optional<Product> getProduct(String id);
+	Optional<Product> findById(Long id);
 
-	List<Product> getProducts();
+	List<Product> getProducts(Pageable pageable);
 
-	Page<Product> findByActive(boolean published, Pageable pageable);
-
-	// Page<Tutorial> findByTitleContaining(String title, Pageable pageable);
+	Long countProduct();
 
 	Product createProduct(Product product);
 

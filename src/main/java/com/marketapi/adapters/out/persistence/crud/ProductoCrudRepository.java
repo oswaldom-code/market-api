@@ -5,14 +5,10 @@ import java.util.Optional;
 
 import com.marketapi.adapters.out.persistence.entity.Producto;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductoCrudRepository extends CrudRepository<Producto, Integer> {
+public interface ProductoCrudRepository extends JpaRepository<Producto, Integer> {
 	List<Producto> findByIdCategoriaOrderByNombreAsc(int idCategoria);
-
-	Page<Producto> findByActive(boolean active, Pageable pageable);
 
 	Optional<List<Producto>> findByCantidadStockLessThanAndEstado(int cantidadStock, boolean estado);
 }

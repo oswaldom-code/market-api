@@ -6,6 +6,7 @@ import java.util.List;
 import com.marketapi.adapters.out.persistence.entity.Producto;
 import com.marketapi.domain.models.Product;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,15 +25,15 @@ public class ProductMapperImp implements ProductMapper {
 	}
 
 	@Override
-	public List<Product> ProductosToProducts(List<Producto> productos) {
+	public List<Product> ProductosToProducts(Page<Producto> productos) {
 		if (productos == null) {
 			return null;
 		}
-		List<Product> list = new ArrayList<Product>();
+		List<Product> listOfProduct = new ArrayList<Product>();
 		for (Producto producto : productos) {
-			list.add(ProductoToProduct(producto));
+			listOfProduct.add(ProductoToProduct(producto));
 		}
-		return list;
+		return listOfProduct;
 	}
 
 	@Override

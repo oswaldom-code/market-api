@@ -7,6 +7,7 @@ import com.marketapi.domain.models.Product;
 import com.marketapi.domain.useCases.ProductUserCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,18 +20,14 @@ public class ProductServices implements ProductUserCase {
 	}
 
 	@Override
-	public Product getProduct(String id) {
-		// TODO Auto-generated method stub
+	public Product findById(Long id) {
+		productRepository.findById(id);
 		return null;
 	}
 
 	@Override
-	public List<Product> getProducts() {
-		List<Product> Products = productRepository.getProducts();
-		if (Products.isEmpty()) {
-			throw new RuntimeException("No hay productos");
-		}
-		return Products;
+	public List<Product> getProducts(Pageable pageable) {
+		return productRepository.getProducts(pageable);
 	}
 
 	@Override
@@ -51,4 +48,8 @@ public class ProductServices implements ProductUserCase {
 
 	}
 
+	@Override
+	public Long countProducts() {
+		return productRepository.countProduct();
+	}
 }

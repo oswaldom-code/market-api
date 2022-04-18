@@ -1,7 +1,7 @@
 package com.marketapi.domain.models;
 
 public class Product {
-	private int productId;
+	private Long productId;
 	private String name;
 	private int categoryId;
 	private double price;
@@ -9,11 +9,11 @@ public class Product {
 	private boolean active;
 	private Category category;
 
-	public int getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 

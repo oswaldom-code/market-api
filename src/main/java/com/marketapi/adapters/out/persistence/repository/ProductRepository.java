@@ -1,6 +1,5 @@
 package com.marketapi.adapters.out.persistence.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +10,8 @@ import com.marketapi.aplication.ports.out.ProductPersistencePort;
 import com.marketapi.domain.models.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -23,19 +22,23 @@ public class ProductRepository implements ProductPersistencePort {
 	@Autowired
 	public ProductMapperImp productMapperImp;
 
+	public ProductRepository(ProductoCrudRepository productoCrudRepository, ProductMapperImp productMapperImp) {
+		this.productoCrudRepository = productoCrudRepository;
+		this.productMapperImp = productMapperImp;
+	}
+
 	@Override
-	public Optional<Product> getProduct(String id) {
+	public Optional<Product> findById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Product> getProducts() {
-		List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
-		if (productos == null) {
-			return new ArrayList<Product>();
-		}
+	public List<Product> getProducts(Pageable pageable) {
+		Page<Producto> productos = productoCrudRepository.findAll(pageable);
+
 		return productMapperImp.ProductosToProducts(productos);
+
 	}
 
 	@Override
@@ -57,9 +60,8 @@ public class ProductRepository implements ProductPersistencePort {
 	}
 
 	@Override
-	public Page<Product> findByActive(boolean active, Pageable pageable) {
-		productoCrudRepository.findByActive(active, pageable);
-		return null;
+	public Long countProduct() {
+		return productoCrudRepository.count();
 	}
 
 }

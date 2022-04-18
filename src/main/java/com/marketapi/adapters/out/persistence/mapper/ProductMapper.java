@@ -6,6 +6,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.data.domain.Page;
 
 import com.marketapi.adapters.out.persistence.entity.Producto;
 
@@ -25,7 +26,7 @@ public interface ProductMapper {
     })
     Product ProductoToProduct(Producto producto);
 
-    List<Product> ProductosToProducts(List<Producto> productos);
+    List<Product> ProductosToProducts(Page<Producto> productos);
 
     @InheritInverseConfiguration
     @Mapping(target = "codigoBarras", ignore = true)
